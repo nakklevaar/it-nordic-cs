@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "demoapp1": {
+      "commandName": "Project",
+      "commandLineArgs": "cghf"
+    }
+  }
+}
