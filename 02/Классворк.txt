@@ -1,0 +1,15 @@
+			char letter = 'a';
+			console.writeline(letter);
+			string name = "bob";
+			console.writeline(name.toupper());
+			float x = 3.5f;
+			console.writeline(x);
+			int o = 3;
+			float y = 4.5f;
+			short z = 5;
+			var result = x * y / z;
+			console.writeline("the result is {0}", result);
+			type type = result.gettype();
+			console.writeline("result is of type {0}", type.tostring());
+			float notnumber = float.NaN;
+			Console.WriteLine(notnumber);
