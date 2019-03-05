@@ -22,7 +22,11 @@ namespace ConsoleApp11
             {
                 Console.Write("Какой объем сока (в литрах) требуется упаковать? - ");
                 if (double.TryParse(Console.ReadLine(), out v1))
+<<<<<<< HEAD
                     break;
+=======
+                break;
+>>>>>>> 55ec94e8218a08ec60e6db14330003b5efc1abe9
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("Wrong value! ");
                 Console.ForegroundColor = defaultColor;
@@ -33,7 +37,11 @@ namespace ConsoleApp11
             int sum5 = 0;
             int sum1 = 0;
             Calc(v, ref sum20, ref sum5, ref sum1, ref usedBag);
+<<<<<<< HEAD
             PrintResult(usedBag, sum1, sum5, sum20, defaultColor, (byte)usedBag);
+=======
+            PrintResult(usedBag, sum1, sum5, sum20, defaultColor,(byte)usedBag);
+>>>>>>> 55ec94e8218a08ec60e6db14330003b5efc1abe9
             Console.ReadKey();
         }
         static void Calc(int v, ref int sum20, ref int sum5, ref int sum1, ref Bags usedBag)
@@ -81,7 +89,11 @@ namespace ConsoleApp11
                 Convert.ToString(value, 2).PadLeft(8, '0'),
                 value.ToString().PadLeft(3, '0'));
         }
+<<<<<<< HEAD
         static void PrintResult(Bags usedBag, int sum1, int sum5, int sum20, ConsoleColor defaultColor, byte value)
+=======
+        static void PrintResult(Bags usedBag, int sum1, int sum5, int sum20, ConsoleColor defaultColor,byte value)
+>>>>>>> 55ec94e8218a08ec60e6db14330003b5efc1abe9
         {
             Console.WriteLine();
             if ((usedBag & Bags.bag20) == Bags.bag20)
