@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ConsoleApp2
 {
@@ -19,7 +19,7 @@ namespace ConsoleApp2
         static void Main(string[] args)
         {
             Colors[] chosen = new Colors[4];
-            Colors?[] notChosen = new Colors?[15];
+            Colors?[] notChosen = new Colors?[8];
             Input(ref chosen, ref notChosen);
             Calc(ref chosen, ref notChosen);
             Print(chosen, notChosen);
