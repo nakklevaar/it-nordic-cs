@@ -20,6 +20,15 @@ namespace ConsoleApp2
         {
             Colors[] chosen = new Colors[4];
             Colors?[] notChosen = new Colors?[15];
+            Input(ref chosen, ref notChosen);
+            Calc(ref chosen, ref notChosen);
+            Print(chosen, notChosen);
+            Console.ReadKey();
+        }
+
+        static void Input(ref Colors[] chosen, ref Colors?[] notChosen)
+        {
+
             Console.WriteLine("Список возможных цветов: " + string.Join(" - ", Enum.GetNames(typeof(Colors))) + "\n");
             object color;
             for (int i = 0; i < 4; i++)
@@ -36,6 +45,9 @@ namespace ConsoleApp2
                     Console.WriteLine("Ошибка, введите цвет правильно.");
                 }
             }
+        }
+        static void Calc(ref Colors[] chosen, ref Colors?[] notChosen)
+        {
             int m = 0;
             for (int i = 0; i < 9; i++)
             {
@@ -50,8 +62,6 @@ namespace ConsoleApp2
                     }
                 }
             }
-            Print(chosen, notChosen);
-            Console.ReadKey();
         }
         static void Print(Colors[] chosen, Colors?[] notChosen)
         {
@@ -63,7 +73,7 @@ namespace ConsoleApp2
                     s = s + k + " ";
             }
             Console.WriteLine("\n \n" + "Избранные цвета: " + s + "\n");
-            Console.Write("Невошедшие: ");
+            Console.Write("Не вошедшее: ");
             foreach (var k in notChosen)
             {
                 if (k != null)
