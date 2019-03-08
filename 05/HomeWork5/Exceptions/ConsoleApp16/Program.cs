@@ -10,6 +10,7 @@ namespace ConsoleApp2
             Triangle,
             Rectangle
         }
+
         static void Main(string[] args)
         {
             Print();
@@ -17,7 +18,7 @@ namespace ConsoleApp2
             {
                 object result = Enum.Parse(typeof(Objects), Console.ReadLine(), true);
                 if ((int)result > 4 || (int)result < 1)
-                    throw new Exception("Используйте только числа от 1 до 4");
+                    throw new IndexOutOfRangeException("Используйте числа от 1 до 3");
                 switch (result)
                 {
                     case Objects.Circle:
@@ -31,18 +32,28 @@ namespace ConsoleApp2
                         break;
                 }
             }
+
             catch (FormatException e)
             {
                 Console.WriteLine(e.GetType() + ": " + e.Message);
             }
+
             catch (ArgumentException e)
             {
                 Console.WriteLine(e.GetType() + ": " + e.Message);
             }
-            catch (Exception e)
+
+            catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine(e.GetType() + ": " + e.Message);
             }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.GetType() + ": " + e.Message);
+                throw;
+            }
+
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
@@ -53,36 +64,41 @@ namespace ConsoleApp2
                 obj[i] = ((Objects)i + 1).ToString() + $" или {i + 1}";
             Console.Write("Введите: " + string.Join(" - ", obj) + "\n");
         }
+
         static void CircleMethod()
         {
             Console.WriteLine("Введите длину диаметра круга: ");
             double d = double.Parse(Console.ReadLine());
             if (d <= 0)
-                throw new Exception("Операция не имеет смысла, аргумент меньше или равен 0");
+                throw new ArgumentOutOfRangeException("Диаметр", "Операция не имеет смысла, аргумент меньше или равен 0");
             double s = Math.PI * Math.Pow(d, 2) / 4;
             double p = 2 * Math.PI * d / 2;
             Console.WriteLine($"Площадь круга  = {Math.Round(s, 2)} \nПериметр круга = {Math.Round(p, 2)}");
         }
+
         static void TriangleMethod()
         {
             Console.WriteLine("Введите длину стороны треугольника: ");
             double a = double.Parse(Console.ReadLine());
             if (a <= 0)
-                throw new Exception("Операция не имеет смысла, аргумент меньше или равен 0");
+                throw new ArgumentOutOfRangeException("Длина", "Операция не имеет смысла, аргумент меньше или равен 0");
             double s = Math.Sqrt(3) / 4 * Math.Pow(a, 2);
             double p = 3 * a;
             Console.WriteLine($"Площадь равностороннего треугольника  = {Math.Round(s, 2)} \nПериметр равностороннего треугольника = {Math.Round(p, 2)}");
         }
+
         static void RectangleMethod()
         {
-            Console.WriteLine("Введите длину длину прямоугольника: ");
+            Console.WriteLine("Введите длину 1 стороны прямоугольника: ");
             double a = double.Parse(Console.ReadLine());
-            Console.WriteLine("Введите длину ширину прямоугольника: ");
+            if (a <= 0)
+                throw new ArgumentOutOfRangeException("Длина", "Операция не имеет смысла, аргумент меньше или равен 0");
+            Console.WriteLine("Введите длину 2 стороны прямоугольника: ");
             double b = double.Parse(Console.ReadLine());
-            if (a <= 0 || b <= 0)
-                throw new Exception("Операция не имеет смысла, аргумент меньше или равен 0");
+            if (b <= 0)
+                throw new ArgumentOutOfRangeException("Длина", "Операция не имеет смысла, аргумент меньше или равен 0");
             double s = a * b;
-            double p = (a + b) / 2;
+            double p = (a + b) * 2;
             Console.WriteLine($"Площадь прямоугольника  = {Math.Round(s, 2)} \nПериметр прямоугольника = {Math.Round(p, 2)}");
         }
     }
