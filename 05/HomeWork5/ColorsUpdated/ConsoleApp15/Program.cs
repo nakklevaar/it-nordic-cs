@@ -18,16 +18,16 @@ namespace ConsoleApp2
         }
         static void Main(string[] args)
         {
-            Input(out Colors[] chosen, out Colors?[] notChosen);
-            Calc(chosen, notChosen);
+            Colors[] chosen = InputChosen();
+            Colors[] notChosen = Calc(chosen);
             Print(chosen, notChosen);
             Console.ReadKey();
         }
 
-        static void Input(out Colors[] chosen, out Colors?[] notChosen)
+        static Colors[] InputChosen()
         {
-            chosen = new Colors[4];
-            notChosen = new Colors?[8];
+            Colors[] chosen = new Colors[4];
+
             Console.WriteLine("Список возможных цветов: " + string.Join(" - ", Enum.GetNames(typeof(Colors))) + "\n");
             object color;
             for (int i = 0; i < 4; i++)
@@ -44,9 +44,13 @@ namespace ConsoleApp2
                     Console.WriteLine("Ошибка, введите цвет правильно.");
                 }
             }
+
+            return chosen;
         }
-        static Colors?[] Calc(Colors[] chosen, Colors?[] notChosen)
+
+        static Colors[] Calc(Colors[] chosen)
         {
+            Colors?[] notChosenNull = new Colors?[8];
             int m = 0;
             for (int i = 0; i < 9; i++)
             {
@@ -56,14 +60,27 @@ namespace ConsoleApp2
                         break;
                     else if (j == 3)
                     {
-                        notChosen[m] = (Colors)i;
+                        notChosenNull[m] = (Colors)i;
                         m++;
                     }
                 }
             }
+
+            Colors[] notChosen = new Colors[m];
+            int g = 0;
+            foreach (var k in notChosenNull)
+            {
+                if (k != null)
+                {
+                    notChosen[g] = k.Value;
+                    g++;
+                }
+            }
+
             return notChosen;
         }
-        static void Print(Colors[] chosen, Colors?[] notChosen)
+
+        static void Print(Colors[] chosen, Colors[] notChosen)
         {
             Console.WriteLine();
             string s = "";
@@ -72,13 +89,9 @@ namespace ConsoleApp2
                 if (!s.Contains(k.ToString()))
                     s = s + k + " ";
             }
+
             Console.WriteLine("\n \n" + "Избранные цвета: " + s + "\n");
-            Console.Write("Не вошедшее: ");
-            foreach (var k in notChosen)
-            {
-                if (k != null)
-                    Console.Write(k + " ");
-            }
+            Console.Write("Не вошедшее: " + string.Join(" ", notChosen));
         }
     }
 }
