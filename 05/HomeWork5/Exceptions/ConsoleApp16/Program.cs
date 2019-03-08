@@ -32,22 +32,18 @@ namespace ConsoleApp2
                         break;
                 }
             }
-
             catch (FormatException e)
             {
                 Console.WriteLine(e.GetType() + ": " + e.Message);
             }
-
             catch (ArgumentException e)
             {
                 Console.WriteLine(e.GetType() + ": " + e.Message);
             }
-
             catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine(e.GetType() + ": " + e.Message);
             }
-
             catch (Exception e)
             {
                 Console.WriteLine(e.GetType() + ": " + e.Message);
@@ -57,6 +53,7 @@ namespace ConsoleApp2
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
+
         static void Print()
         {
             string[] obj = new string[3];

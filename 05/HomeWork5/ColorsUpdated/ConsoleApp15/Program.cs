@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace ConsoleApp2
 {
@@ -18,17 +18,16 @@ namespace ConsoleApp2
         }
         static void Main(string[] args)
         {
-            Colors[] chosen = new Colors[4];
-            Colors?[] notChosen = new Colors?[8];
-            Input(ref chosen, ref notChosen);
-            Calc(ref chosen, ref notChosen);
+            Input(out Colors[] chosen, out Colors?[] notChosen);
+            Calc(chosen, notChosen);
             Print(chosen, notChosen);
             Console.ReadKey();
         }
 
-        static void Input(ref Colors[] chosen, ref Colors?[] notChosen)
+        static void Input(out Colors[] chosen, out Colors?[] notChosen)
         {
-
+            chosen = new Colors[4];
+            notChosen = new Colors?[8];
             Console.WriteLine("Список возможных цветов: " + string.Join(" - ", Enum.GetNames(typeof(Colors))) + "\n");
             object color;
             for (int i = 0; i < 4; i++)
@@ -46,7 +45,7 @@ namespace ConsoleApp2
                 }
             }
         }
-        static void Calc(ref Colors[] chosen, ref Colors?[] notChosen)
+        static Colors?[] Calc(Colors[] chosen, Colors?[] notChosen)
         {
             int m = 0;
             for (int i = 0; i < 9; i++)
@@ -62,6 +61,7 @@ namespace ConsoleApp2
                     }
                 }
             }
+            return notChosen;
         }
         static void Print(Colors[] chosen, Colors?[] notChosen)
         {
