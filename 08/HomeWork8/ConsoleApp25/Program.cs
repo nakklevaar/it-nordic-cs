@@ -84,6 +84,13 @@ namespace ConsoleApp25
                         break;
                     }
                 }
+                else if (text.Length == 1)
+                {
+                    Console.WriteLine(text);
+                    Console.WriteLine($"Step{i}: failed");
+                    break;
+                }
+
                 else
                 {
                     break;
