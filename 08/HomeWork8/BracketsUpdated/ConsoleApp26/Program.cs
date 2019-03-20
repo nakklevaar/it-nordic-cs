@@ -21,6 +21,7 @@ namespace ConsoleApp26
 
             var bracketsStack = new Stack<char>();
 
+            bool soloEndBracket = false;
             foreach (var k in text)
             {
                 if (bracketsDic.ContainsValue(k))
@@ -28,13 +29,22 @@ namespace ConsoleApp26
                     bracketsStack.Push(k);
                     continue;
                 }
-                if (bracketsDic.ContainsKey(k) && bracketsDic[k] == bracketsStack.Peek())
+                if (bracketsStack.Count != 0 && bracketsDic.ContainsKey(k) && bracketsDic[k] == bracketsStack.Peek())
                 {
                     bracketsStack.Pop();
+                    continue;
                 }
+                soloEndBracket = true;
             }
 
-            Print(text, bracketsStack);
+            if (!soloEndBracket)
+            {
+                Print(text, bracketsStack);
+            }
+            else
+            {
+                Console.WriteLine("\nUncorrect brackets, failed...");
+            }
 
             Console.ReadKey();
         }
