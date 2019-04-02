@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp28
 {
@@ -6,13 +7,37 @@ namespace ConsoleApp28
     {
         static void Main(string[] args)
         {
-            ReminderItem p1 = new ReminderItem(DateTimeOffset.Parse("29-03-2019"), "Доброе утро");
-            p1.WriteProperties();
+            var ri = new ReminderItem(DateTimeOffset.Parse("03-05-2019"), "Забрать посылку");
+            var pri = new PhoneReminderItem(DateTimeOffset.Now, "Поздороваться", "89876543210");
+            var cri = new ChatReminderItem(DateTimeOffset.Parse("30-08-2007"), "аларм мессадж", "сельпо", "denis93");
 
-            Console.WriteLine();
+            var List = new List<ReminderItem>
+            {
+                ri,
+                pri,
+                cri
+            };
 
-            ReminderItem p2 = new ReminderItem(DateTimeOffset.Parse("18-06-2019 23:34"), "Позвонить в 8");
-            p2.WriteProperties();
+            foreach (var item in List)
+            {   
+                if (item is PhoneReminderItem)
+                {
+                    (item as PhoneReminderItem).WriteProperties();
+                    continue;
+                }
+
+                if (item is ChatReminderItem)
+                {
+                    (item as ChatReminderItem).WriteProperties();
+                    continue;
+                }
+
+                if (item is ReminderItem)
+                {
+                    (item as ReminderItem).WriteProperties();
+                    continue;
+                }
+            }
 
             Console.ReadKey();
         }

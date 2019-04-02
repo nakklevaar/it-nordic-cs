@@ -4,29 +4,24 @@ using System.Text;
 
 namespace ConsoleApp28
 {
-    class ReminderItem
+    class PhoneReminderItem : ReminderItem
     {
-        public DateTimeOffset AlarmDate { get; set; }
-        public string AlarmMessage { get; set; }
+        string PhoneNumber { get; set; }
 
-        public TimeSpan TimeToAlarm { get { return AlarmDate.Subtract(DateTimeOffset.Now); } }
+        public PhoneReminderItem(DateTimeOffset alarmDate, string alarmMessage, string phoneNumber) : base (alarmDate,alarmMessage)
+        {
+            PhoneNumber = phoneNumber;
+        }
 
-        public bool IsOutdated { get { return AlarmDate <= DateTimeOffset.Now; } }
-
-        public virtual void WriteProperties()
+        public override void WriteProperties()
         {
             Console.WriteLine(GetType().Name);
             Console.WriteLine($"{nameof(AlarmDate)} : {AlarmDate.ToString("MM/dd/yyyy HH:mm:ss")}");
             Console.WriteLine($"{nameof(AlarmMessage)} : {AlarmMessage}");
             Console.WriteLine($"{nameof(TimeToAlarm)} : {TimeToAlarm.ToString("c")}");
             Console.WriteLine($"{nameof(IsOutdated)} : {IsOutdated}");
+            Console.WriteLine($"{nameof(PhoneNumber)} : {PhoneNumber}");
             Console.WriteLine();
-        }
-
-        public ReminderItem(DateTimeOffset alarmDate, string alarmMessage)
-        {
-            AlarmDate = alarmDate;
-            AlarmMessage = alarmMessage;
         }
     }
 }
