@@ -11,7 +11,7 @@ namespace ConsoleApp28
 			BaseDocument bd2 = new BaseDocument("Drive Licence", 235, DateTimeOffset.MinValue);
 			BaseDocument bd3 = new BaseDocument("Drive Licence", 236, DateTimeOffset.MinValue);
 
-			Passport pass = new Passport(23, DateTimeOffset.Parse("03-04-2014"),"Russia", "Denis");
+			Passport pass = new Passport(bd1.DocName,bd1.DocNumber, bd1.IssueDate,"Russia", "Denis");
 
 			BaseDocument[] array =
 			{

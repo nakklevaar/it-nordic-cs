@@ -6,8 +6,8 @@ namespace ConsoleApp28
 {
 	class Passport : BaseDocument
 	{
-		public Passport(int docNumber, DateTimeOffset issueDate, string country, string personName)
-			: base("Passport", docNumber, issueDate)
+		public Passport(string docName,int docNumber, DateTimeOffset issueDate, string country, string personName)
+			: base(docName, docNumber, issueDate)
 		{
 			Country = country;
 			PersonName = personName;
