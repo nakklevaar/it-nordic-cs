@@ -14,17 +14,17 @@ namespace ConsoleApp28
 			Console.WriteLine("It's a plane, welcome aboard");
 		}
 
-		public override void WriteAllProperties()
-		{
-			Console.WriteLine($"{nameof(EnginesCount)}: {EnginesCount} \n" +
-								$"{nameof(CurrentHeigth)}: {CurrentHeigth} \n" +
-								$"{nameof(MaxHeight)}: {MaxHeight} \n");
-		}
+        public override void WriteAllProperties()
+        {
+            Console.WriteLine($"{nameof(EnginesCount)}: {EnginesCount} \n" +
+                                $"{nameof(CurrentHeigth)}: {CurrentHeigth} \n" +
+                                $"{nameof(MaxHeight)}: {MaxHeight} \n");
+        }
 
-		public override void WriteAllProperties2()
-		{
-			Console.WriteLine($"{nameof(EnginesCount)}: {EnginesCount} \n");
-			base.WriteAllProperties2();
-		}
-	}
+        public override void WriteAllProperties2()
+        {
+            Console.WriteLine($"{nameof(EnginesCount)}: {EnginesCount} \n");
+            base.WriteAllProperties2();
+        }
+    }
 }

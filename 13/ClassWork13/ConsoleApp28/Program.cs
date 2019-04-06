@@ -7,12 +7,12 @@ namespace ConsoleApp28
     {
 		static void Main()
 		{
-			var hel = new Helicopter(235, 3);
+			FlyingObject hel = new Helicopter(235, 3);
 			hel.TakeUpper(16);
 			hel.TakeUpper(30);
 			hel.TakeLower(11);
 			hel.WriteAllProperties();
-			hel.WriteAllProperties();
+			hel.WriteAllProperties2();
 			Console.ReadKey();
 		}
     }

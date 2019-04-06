@@ -56,12 +56,12 @@ namespace ConsoleApp28
 			}
 		}
 
-		public abstract void WriteAllProperties();
-		public virtual void WriteAllProperties2()
-		{
-			Console.WriteLine(
-				$"{nameof(CurrentHeigth)}: {CurrentHeigth} \n" +
-				$"{nameof(MaxHeight)}: {MaxHeight} \n");
-		}
-	}
+        public abstract void WriteAllProperties();
+        public virtual void WriteAllProperties2()
+        {
+            Console.WriteLine(
+                $"{nameof(CurrentHeigth)}: {CurrentHeigth} \n" +
+                $"{nameof(MaxHeight)}: {MaxHeight} \n");
+        }
+    }
 }

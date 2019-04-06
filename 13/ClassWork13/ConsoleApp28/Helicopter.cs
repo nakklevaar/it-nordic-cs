@@ -23,7 +23,7 @@ namespace ConsoleApp28
 
 		public override void WriteAllProperties2()
 		{
-			Console.WriteLine($"{nameof(BladesCount)}: {BladesCount} \n");
+			Console.WriteLine($"{nameof(BladesCount)}: {BladesCount}");
 			base.WriteAllProperties2();
 		}
 	}
