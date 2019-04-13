@@ -41,22 +41,6 @@ namespace ConsoleApp30
 
         //////////////////////////////////////////////////////////////////////////////////////
 
-        private static ILogWriter GetLogWriterDelegate(LogWriters logWriterType, string filename, List<ILogWriter> list)
-        {
-            switch (logWriterType)
-            {
-                case LogWriters.ConsoleLogWriter:
-                    return new ConsoleLogWriter();
-
-                case LogWriters.FileLogWriter:
-                    return new FileLogWriter(filename);
-
-                case LogWriters.MultipleLogWriter:
-                    return new MultipleLogWriter(list);
-            }
-
-            throw new Exception();
-        }
 
         private string _filename;
         private List<ILogWriter> _writers;
@@ -67,7 +51,7 @@ namespace ConsoleApp30
             _writers = writers;
         }
 
-        private Func<LogWriters, string, List<ILogWriter>, ILogWriter> NewWriter = GetLogWriterDelegate;
+        private Func<LogWriters, string, List<ILogWriter>, ILogWriter> NewWriter { get { return GetLogWriter<ILogWriter>; } }
 
         public ILogWriter ConsoleLog { get { return NewWriter(LogWriters.ConsoleLogWriter, null, null); } }
 
