@@ -26,7 +26,9 @@ namespace ConsoleApp30
             Console.WriteLine("//////////////////////////////");
             //////////////////////////////
             
-            f1.MyBestDecision("test.txt", list);
+            f1.MyBestDecision("test.txt");
+            f1.MyBestDecision(list);
+
             var ex4 = f1.ConsoleLog;
             var ex5 = f1.FileLog;
             var ex6 = f1.MultipleLog;

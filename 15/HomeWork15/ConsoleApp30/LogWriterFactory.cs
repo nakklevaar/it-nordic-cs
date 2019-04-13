@@ -45,10 +45,12 @@ namespace ConsoleApp30
         private string _filename;
         private List<ILogWriter> _writers;
 
-        public void MyBestDecision(string filename, List<ILogWriter> writers)
+        public void MyBestDecision<U>(U example)
         {
-            _filename = filename;
-            _writers = writers;
+            if (typeof(U) == typeof(string))
+                _filename = example as string;
+            if (typeof(U) == typeof(List<ILogWriter>))
+                _writers = example as List<ILogWriter>;
         }
 
         private Func<LogWriters, string, List<ILogWriter>, ILogWriter> NewWriter { get { return GetLogWriter<ILogWriter>; } }
