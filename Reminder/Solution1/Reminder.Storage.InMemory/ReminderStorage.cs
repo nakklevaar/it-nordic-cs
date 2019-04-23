@@ -16,10 +16,15 @@ namespace Reminder.Storage.InMemory
 
 		public void Add(ReminderItem reminderItem)
 		{
-            if (!_storage.ContainsValue(reminderItem))
-			_storage.Add(reminderItem.Id, reminderItem);
+            if (reminderItem.ItemStatus == ReminderItemStatus.Awaiting)
+            {
+                if (!_storage.ContainsValue(reminderItem))
+                    _storage.Add(reminderItem.Id, reminderItem);
+                else
+                    throw new Exception("already exists");
+            }
             else
-                throw new Exception("already exists");
+                throw new Exception ("out of date");
         }
 
 		public ReminderItem Get(Guid id)
@@ -59,10 +64,15 @@ namespace Reminder.Storage.InMemory
 
 		public void Update(ReminderItem reminderItem)
 		{
-            if (_storage.ContainsValue(reminderItem) && reminderItem.ItemStatus == ReminderItemStatus.Awaiting)
-                _storage[reminderItem.Id] = reminderItem;
+            if (reminderItem.ItemStatus == ReminderItemStatus.Awaiting)
+            {
+                if (_storage.ContainsValue(reminderItem))
+                    _storage[reminderItem.Id] = reminderItem;
+                else
+                    throw new Exception("doesnt exist");
+            }
             else
-                throw new Exception("too late or doesnt exist");
-		}
+                throw new Exception("out of date");
+        }
 	}
 }
