@@ -7,7 +7,7 @@ namespace ConsoleApp28
     {
 		static void Main()
 		{
-			FlyingObject hel = new Helicopter(235, 3);
+			Helicopter hel = new Helicopter(235, 3);
 			hel.TakeUpper(16);
 			hel.TakeUpper(30);
 			hel.TakeLower(11);
