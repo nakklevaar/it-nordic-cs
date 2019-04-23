@@ -63,5 +63,34 @@ namespace Reminder.Storage.InMemory.Tests
             Assert.AreEqual(expected, actual);
 
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Add__Exception_Works_Validly()
+        {
+            var storage = new ReminderStorage();
+            var id = new Guid("531F3399-3DB0-41EA-9D7D-BA1E9651C62A");
+            var expected = new ReminderItem(id, DateTimeOffset.Now, null, null);
+
+            storage.Add(expected);
+            storage.Add(expected);
+
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Update_Exception_Works_Validly()
+        {
+            var storage = new ReminderStorage();
+            var id = new Guid("531F3399-3DB0-41EA-9D7D-BA1E9651C62A");
+            var expected = new ReminderItem(id, DateTimeOffset.Now, null, null);
+            var actual = new ReminderItem(Guid.NewGuid(), DateTimeOffset.Now, null, null);
+
+            storage.Add(expected);
+            storage.Update(actual);
+
+
+        }
     }
 }
