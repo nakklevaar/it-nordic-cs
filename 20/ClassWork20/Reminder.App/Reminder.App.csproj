@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Reminder.Domain\Reminder.Domain.csproj" />
+    <ProjectReference Include="..\Reminder.Receiver.Telegram\Reminder.Receiver.Telegram.csproj" />
+    <ProjectReference Include="..\Reminder.Sender.Telegram\Reminder.Sender.Telegram.csproj" />
+    <ProjectReference Include="..\Reminder.Storage.InMemory\Reminder.Storage.InMemory.csproj" />
+  </ItemGroup>
+
+</Project>
