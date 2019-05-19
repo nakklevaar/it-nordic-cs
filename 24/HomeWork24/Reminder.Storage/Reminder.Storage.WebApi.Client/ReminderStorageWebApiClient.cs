@@ -10,41 +10,41 @@ using System.Linq;
 
 namespace Reminder.Storage.WebApi.Client
 {
-	public class ReminderStorageWebApiClient : IReminderStorage
-	{
-		private string _baseWebApiUrl;
-		private HttpClient _httpClient;
+    public class ReminderStorageWebApiClient : IReminderStorage
+    {
+        private string _baseWebApiUrl;
+        private HttpClient _httpClient;
 
-		public ReminderStorageWebApiClient(string baseWebApiUrl)
-		{
-			_baseWebApiUrl = baseWebApiUrl;
-			_httpClient = HttpClientFactory.Create();
-		}
+        public ReminderStorageWebApiClient(string baseWebApiUrl)
+        {
+            _baseWebApiUrl = baseWebApiUrl;
+            _httpClient = HttpClientFactory.Create();
+        }
 
-		public void Add(ReminderItem reminder)
-		{
-			string method = "POST";
-			string relativeUrl = "/api/reminders";
-			string content = JsonConvert.SerializeObject(new ReminderItemCreateModel(reminder));
+        public void Add(ReminderItem reminder)
+        {
+            string method = "POST";
+            string relativeUrl = "/api/reminders";
+            string content = JsonConvert.SerializeObject(new ReminderItemCreateModel(reminder));
 
-			var request = new HttpRequestMessage(new HttpMethod(method),
-				_baseWebApiUrl+relativeUrl);
+            var request = new HttpRequestMessage(new HttpMethod(method),
+                _baseWebApiUrl + relativeUrl);
 
-			request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
 
-			request.Content = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
+            request.Content = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
 
-			var result = _httpClient.SendAsync(request).Result;
+            var result = _httpClient.SendAsync(request).Result;
 
-			if (result.StatusCode !=System.Net.HttpStatusCode.Created)
-			{
-				throw new Exception($"Error: {result.StatusCode}, " +
-					$"Content: {result.Content.ReadAsStringAsync().Result}");
-			}
-		}
+            if (result.StatusCode != System.Net.HttpStatusCode.Created)
+            {
+                throw new Exception($"Error: {result.StatusCode}, " +
+                    $"Content: {result.Content.ReadAsStringAsync().Result}");
+            }
+        }
 
-		public ReminderItem Get(Guid id)
-		{
+        public ReminderItem Get(Guid id)
+        {
             string method = "GET";
             string relativeUrl = $"/api/reminders/{id}";
 
@@ -62,8 +62,8 @@ namespace Reminder.Storage.WebApi.Client
             return null;
         }
 
-		public List<ReminderItem> Get(ReminderItemStatus status)
-		{
+        public List<ReminderItem> Get(ReminderItemStatus status)
+        {
             string method = "GET";
             string relativeUrl = $"/api/reminders?[filter]status={status}";
 
@@ -81,8 +81,8 @@ namespace Reminder.Storage.WebApi.Client
             return null;
         }
 
-		public void UpdateStatus(IEnumerable<Guid> ids, ReminderItemStatus status)
-		{
+        public void UpdateStatus(IEnumerable<Guid> ids, ReminderItemStatus status)
+        {
             string method = "PATCH";
             string relativeUrl = "/api/reminders";
             string content = JsonConvert.SerializeObject(new ReminderItemListPatchModel(ids, status));
@@ -103,11 +103,11 @@ namespace Reminder.Storage.WebApi.Client
             }
         }
 
-		public void UpdateStatus(Guid id, ReminderItemStatus status)
-		{
+        public void UpdateStatus(Guid id, ReminderItemStatus status)
+        {
             string method = "PATCH";
             string relativeUrl = $"/api/reminders/{id}";
-            string content = JsonConvert.SerializeObject(new ReminderItemPatchModel (status));
+            string content = JsonConvert.SerializeObject(new ReminderItemPatchModel(status));
 
             var request = new HttpRequestMessage(new HttpMethod(method),
                 _baseWebApiUrl + relativeUrl);
@@ -124,5 +124,5 @@ namespace Reminder.Storage.WebApi.Client
                     $"Content: {result.Content.ReadAsStringAsync().Result}");
             }
         }
-	}
+    }
 }

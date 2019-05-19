@@ -69,7 +69,7 @@ namespace Reminder.Storage.WebApi.Controllers
             }
             var patch = new JsonPatchDocument();
 
-            if (patchModel.Status!=reminder.Status)
+            if (patchModel.Status != reminder.Status)
             {
                 patch.Replace(nameof(patchModel.Status), patchModel.Status);
             }
@@ -96,7 +96,15 @@ namespace Reminder.Storage.WebApi.Controllers
 
             var patchModel = new ReminderItemPatchModel(listPatchModel.Status);
 
-           reminders =  reminders.Where(x => patchModel.Status != x.Status).Select(x => { patch.Replace(nameof(patchModel.Status), patchModel.Status); patch.ApplyTo(x); return x; }).ToList();
+            reminders = reminders
+                 .Where(x => patchModel.Status != x.Status)
+                 .Select(x =>
+                 {
+                     patch.Replace(nameof(patchModel.Status), patchModel.Status);
+                     patch.ApplyTo(x);
+                     return x;
+                 })
+                 .ToList();
 
             return Ok(reminders);
         }
