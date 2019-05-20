@@ -1,54 +1,54 @@
-﻿using System;
-using Reminder.Storage.Core;
-
+﻿using Reminder.Storage.Core;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Reminder.Storage.WebApi.Core
 {
-	public class ReminderItemGetModel
+	public class ReminderItemCreateModel
 	{
-		/// <summary>
-		/// Gets the identifier.
-		/// </summary>
-		public Guid Id { get; }
-
 		/// <summary>
 		/// Gets or sets the date and time the reminder item scheduled for sending.
 		/// </summary>
+		[Required]
 		public DateTimeOffset Date { get; set; }
 
 		/// <summary>
 		/// Gets or sets contact identifier in the target sending system.
 		/// </summary>
+		[Required]
+		[MaxLength(50)]
 		public string ContactId { get; set; }
 
 		/// <summary>
 		/// Gets or sets the message of the reminder item for sending to the recipient.
 		/// </summary>
+		[Required]
+		[MaxLength(200)]
 		public string Message { get; set; }
 
 		/// <summary>
 		/// Gets or sets the identifier of the recipient.
 		/// </summary>
-		public ReminderItemStatus Status { get; set; }
+		[Required]
+		[Range(0,3)]
+		public ReminderItemStatusUpdateModel Status { get; set; }
 
-		public ReminderItemGetModel()
+		public ReminderItemCreateModel()
 		{
 		}
 
-		public ReminderItemGetModel(ReminderItem reminderItem)
+		public ReminderItemCreateModel(ReminderItemRestricted reminderItem)
 		{
-			Id = reminderItem.Id;
 			Date = reminderItem.Date;
 			ContactId = reminderItem.ContactId;
 			Message = reminderItem.Message;
 			Status = reminderItem.Status;
 		}
 
-		public ReminderItem ToReminderItem()
+		public ReminderItemRestricted ToReminderItem()
 		{
-			return new ReminderItem()
+			return new ReminderItemRestricted()
 			{
-				Id = Id,
 				Date = Date,
 				ContactId = ContactId,
 				Message = Message,
@@ -57,3 +57,4 @@ namespace Reminder.Storage.WebApi.Core
 		}
 	}
 }
+
