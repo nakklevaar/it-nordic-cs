@@ -3,7 +3,7 @@
 	/// <summary>
 	/// The status of the single reminder item.
 	/// </summary>
-	public enum ReminderItemStatusUpdateModel
+	public enum ReminderItemStatus
 	{
 		/// <summary>
 		/// Reminder queued and waits its time for sending.

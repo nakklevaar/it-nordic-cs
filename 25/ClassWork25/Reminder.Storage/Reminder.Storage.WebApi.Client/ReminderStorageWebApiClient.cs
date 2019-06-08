@@ -58,7 +58,7 @@ namespace Reminder.Storage.WebApi.Client
 			return JsonConvert.DeserializeObject<ReminderItemGetModel>(content).ToReminderItem();
 		}
 
-		public List<ReminderItemResricted> Get(ReminderItemStatusUpdateModel status)
+		public List<ReminderItemResricted> Get(ReminderItemStatus status)
 		{
 			var result = CallWebApi("GET", $"/api/reminders/[filter]status={(int)status}");
 
@@ -69,7 +69,7 @@ namespace Reminder.Storage.WebApi.Client
 				.ToList();
 		}
 
-		public void UpdateStatus(IEnumerable<Guid> ids, ReminderItemStatusUpdateModel status)
+		public void UpdateStatus(IEnumerable<Guid> ids, ReminderItemStatus status)
 		{
 			var patchDocument = new JsonPatchDocument<ReminderItemUpdateModel>(new List<Operation<ReminderItemUpdateModel>>
 			{
@@ -99,7 +99,7 @@ namespace Reminder.Storage.WebApi.Client
 			}
 		}
 
-		public void UpdateStatus(Guid id, ReminderItemStatusUpdateModel status)
+		public void UpdateStatus(Guid id, ReminderItemStatus status)
 		{
 			var patchDocument = new JsonPatchDocument<ReminderItemUpdateModel>(new List<Operation<ReminderItemUpdateModel>>
 			{

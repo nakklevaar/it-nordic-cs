@@ -46,16 +46,16 @@ namespace Reminder.Storage.Core
 		/// <summary>
 		/// Gets the list of items by status with pagination.
 		/// </summary>
-		List<ReminderItemResricted> Get(ReminderItemStatusUpdateModel status);
+		List<ReminderItemResricted> Get(ReminderItemStatus status);
 
 		/// <summary>
 		/// Updates the status of the items by their IDs.
 		/// </summary>
-		void UpdateStatus(IEnumerable<Guid> ids, ReminderItemStatusUpdateModel status);
+		void UpdateStatus(IEnumerable<Guid> ids, ReminderItemStatus status);
 
 		/// <summary>
 		/// Updates the status of the single item by its ID.
 		/// </summary>
-		void UpdateStatus(Guid id, ReminderItemStatusUpdateModel status);
+		void UpdateStatus(Guid id, ReminderItemStatus status);
 	}
 }

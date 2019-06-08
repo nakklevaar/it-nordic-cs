@@ -4,13 +4,13 @@ using Microsoft.Extensions.Configuration;
 using MihaZupan;
 using Reminder.Domain;
 using Reminder.Domain.EventArgs;
-using Reminder.Storage.InMemory;
 using Reminder.Receiver.Telegram;
 using Reminder.Sender.Telegram;
+using Reminder.Storage.WebApi.Client;
 
 namespace Reminder.App
 {
-	class Program
+    class Program
 	{
 		static void Main(string[] args)
 		{
@@ -28,7 +28,7 @@ namespace Reminder.App
 
 			// create objects for DI
 
-			var reminderStorage = new InMemoryReminderStorage();
+			var reminderStorage = new ReminderStorageWebApiClient(storageWebApiUrl);
 
 			IWebProxy telegramProxy = null;
 			if (telegramBotUseProxy)

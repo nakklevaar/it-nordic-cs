@@ -7,6 +7,6 @@ namespace Reminder.Storage.WebApi.Core
 {
 	public class ReminderItemUpdateModel
 	{
-		public ReminderItemStatusUpdateModel Status { get; set; }
+		public ReminderItemStatus Status { get; set; }
 	}
 }

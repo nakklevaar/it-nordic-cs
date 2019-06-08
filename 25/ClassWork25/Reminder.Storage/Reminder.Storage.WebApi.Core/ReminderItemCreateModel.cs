@@ -31,7 +31,7 @@ namespace Reminder.Storage.WebApi.Core
 		/// </summary>
 		[Required]
 		[Range(0,3)]
-		public ReminderItemStatusUpdateModel Status { get; set; }
+		public ReminderItemStatus Status { get; set; }
 
 		public ReminderItemCreateModel()
 		{

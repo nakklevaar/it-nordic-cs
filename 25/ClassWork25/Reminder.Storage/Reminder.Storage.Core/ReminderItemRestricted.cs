@@ -26,7 +26,7 @@ namespace Reminder.Storage.Core
 		/// <summary>
 		/// Gets or sets the identifier of the recipient.
 		/// </summary>
-		public ReminderItemStatusUpdateModel Status { get; set; }
+		public ReminderItemStatus Status { get; set; }
 
 		/// <summary>
 		/// Gets the value indicating whether the time for sending item came or not.
