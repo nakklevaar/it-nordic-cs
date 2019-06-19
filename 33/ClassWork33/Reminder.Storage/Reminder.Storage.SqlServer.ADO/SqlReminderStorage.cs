@@ -114,13 +114,42 @@ namespace Reminder.Storage.Sql
 
         public void UpdateStatus(IEnumerable<Guid> ids, ReminderItemStatus status)
         {
-            List<Guid> list = ids.ToList();
+			using (var sqlConnection = GetOpenedSqlConnection())
+			{
 
-            foreach (var id in list)
-            {
-                UpdateStatus(id, status);
-            }
-        }
+				var sqlCommand = sqlConnection.CreateCommand();
+				sqlCommand.CommandType = System.Data.CommandType.Text;
+				sqlCommand.CommandText = "CREATE TABLE #ReminderItem (Id UNIQUEIDENTIFIER NOT NULL)";
+				sqlCommand.ExecuteNonQuery();
+
+				using (SqlBulkCopy copy = new SqlBulkCopy(sqlConnection))
+				{
+					copy.BatchSize = 1000;
+					copy.DestinationTableName = "#RemidnerItem";
+
+					DataTable dataTable = new DataTable("#ReminderItem");
+					dataTable.Columns.Add("Id", typeof(Guid));
+
+					foreach(Guid id in ids)
+					{
+						DataRow row = dataTable.NewRow();
+						dataTable.Rows.Add(row);
+					}
+
+					copy.WriteToServer(dataTable);
+				}
+
+				sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+				sqlCommand.CommandText = "dbo.UpdateReminderItemsBulk";
+				sqlCommand.Parameters.AddWithValue("@statusId", (byte)status);
+				sqlCommand.ExecuteNonQuery();
+
+				sqlCommand.CommandType = System.Data.CommandType.Text;
+				sqlCommand.CommandText = "DROP TABLE #ReminderItem";
+
+				sqlCommand.ExecuteNonQuery();
+			}
+		}
 
         public void UpdateStatus(Guid id, ReminderItemStatus status)
         {
@@ -142,21 +171,50 @@ namespace Reminder.Storage.Sql
 
         public List<ReminderItem> Get(int count = 0, int startPostion = 0)
         {
-            throw new NotImplementedException();
-        }
+			var result = new List<ReminderItem>();
+			result.AddRange(Get(ReminderItemStatus.Awaiting));
+			result.AddRange(Get(ReminderItemStatus.Ready));
+			result.AddRange(Get(ReminderItemStatus.Sent));
+			result.AddRange(Get(ReminderItemStatus.Failed));
+
+			return result;
+		}
 
         public List<ReminderItem> Get(ReminderItemStatus status, int count, int startPostion)
         {
-            throw new NotImplementedException();
+			return Get(status);
         }
 
 
         public bool Remove(Guid id)
         {
-            throw new NotImplementedException();
+            using(var sqlConnection = GetOpenedSqlConnection())
+			{
+				var sqlCommand = sqlConnection.CreateCommand();
+				sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+				sqlCommand.CommandText = "dbo.RemoveReminderItemById";
+
+				sqlCommand.Parameters.AddWithValue(@"reminderId",id);
+
+				return (bool)sqlCommand.ExecuteScalar();
+			}
         }
 
-        public int Count => throw new NotImplementedException();
+        public int Count
+		{
+			get
+			{
+				using (var sqlConnection = GetOpenedSqlConnection())
+				{
+
+					var sqlCommand = sqlConnection.CreateCommand();
+					sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+					sqlCommand.CommandText = "dbo.GetReminderItemsCount";
+
+					return (int)sqlCommand.ExecuteScalar();
+				}
+			}
+		}
 
         private SqlConnection GetOpenedSqlConnection()
 		{

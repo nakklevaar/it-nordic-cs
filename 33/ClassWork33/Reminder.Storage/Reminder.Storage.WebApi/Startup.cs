@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Reminder.Storage.Core;
 using Reminder.Storage.InMemory;
+using Reminder.Storage.Sql;
 
 namespace Reminder.Storage.WebApi
 {
@@ -40,7 +41,14 @@ namespace Reminder.Storage.WebApi
 						Version = "V1"
 					});
 			});
-			services.AddSingleton<IReminderStorage>(new SqlReminderStorage(Configuration["SqlConnection"]));
+
+			var str = new ConfigurationBuilder()
+				.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+				.AddJsonFile("appsettings.json")
+				.Build()
+				.GetConnectionString("DefaultConnection");
+
+			services.AddSingleton<IReminderStorage>(new SqlReminderStorage(str));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

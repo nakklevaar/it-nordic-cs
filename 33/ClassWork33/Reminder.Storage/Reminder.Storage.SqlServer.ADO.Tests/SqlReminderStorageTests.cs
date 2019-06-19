@@ -10,7 +10,7 @@ namespace Reminder.Storage.Sql.Tests
     public class SqlReminderStorageTests
     {
         private const string _connectionString =
-            @"Data Source=DESKTOP-AMTPKSH\SQLEXPRESS;Initial Catalog=ReminderTests;Integrated Security=true;";
+			@"Data Source=localhost\SQLEXPRESS;Initial Catalog=ReminderTests;Integrated Security=true;";
 
         [TestInitialize]
         public void TestInitialize()
@@ -115,5 +115,48 @@ namespace Reminder.Storage.Sql.Tests
 
             Assert.AreEqual(expectedStatus, actualReminderStatus);
         }
-    }
+
+		[TestMethod]
+		public void Property_Count_Returns_8_For_Initial_Data_Set()
+		{
+			var storage = new SqlReminderStorage(_connectionString);
+
+			int actual = storage.Count;
+
+			Assert.AreEqual(3, actual);
+		}
+
+		[TestMethod]
+		public void Method_Delete()
+		{
+			var storage = new SqlReminderStorage(_connectionString);
+
+			storage.Remove(Guid.Parse("00000000-0000-0000-0000-333333333333"));
+
+			int actual = storage.Count;
+
+			Assert.AreEqual(2, actual);
+		}
+
+		[TestMethod]
+		public void UpdateStatus_Method_With_Ids_Collection_Updates_Corresponded_Items()
+		{
+			var storage = new SqlReminderStorage(_connectionString);
+
+			var ids = new List<Guid>
+			{
+				new Guid("00000000-0000-0000-0000-111111111111"),
+				new Guid("00000000-0000-0000-0000-222222222222"),
+				new Guid("00000000-0000-0000-0000-333333333333")
+			};
+
+			storage.UpdateStatus(ids, ReminderItemStatus.Failed);
+
+			var actual = storage.Get(ReminderItemStatus.Failed);
+
+			Assert.IsTrue(actual.Select(x => x.Id).Contains(ids[0]));
+			Assert.IsTrue(actual.Select(x => x.Id).Contains(ids[1]));
+			Assert.IsTrue(actual.Select(x => x.Id).Contains(ids[2]));
+		}
+	}
 }
