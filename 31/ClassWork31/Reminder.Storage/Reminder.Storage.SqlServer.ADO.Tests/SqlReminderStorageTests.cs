@@ -5,15 +5,16 @@ using System.Text;
 
 namespace Reminder.Storage.SqlServer.ADO.Tests
 {
-    class SqlReminderStorageTests
+    [TestClass]
+    public class SqlReminderStorageTests
     {
         private const string _connectionString =
-            @"Data Source=localhost\SQLEXPRESS;Initial Catalog=ReminderTests, Integrated Security";
+         @"Data Source=localhost\SQLEXPRESS;Initial Catalog=ReminderTests;Integrated Security=True";
 
         [TestInitialize]
         public void TestIitialize()
         {
-            new SqlReminderStorageInit(_connectionString).InitializeDatabase();
+            new SqlReminderStorageInit(_connectionString).InitializeDataBase();
         }
 
         [TestMethod]
@@ -21,7 +22,15 @@ namespace Reminder.Storage.SqlServer.ADO.Tests
         {
             var Storage = new SqlReminderStorage(_connectionString);
 
-            Guid actual = Storage.Add(new Core.ReminderItemRestricted)
+            Guid actual = Storage.Add(new Core.ReminderItemRestricted
+            {
+                ContactId = "TestContactId",
+                Date = DateTimeOffset.Now.AddHours(1),
+                Message = "test message",
+                Status = Core.ReminderItemStatus.Awaiting
+            });
+
+            Assert.AreNotEqual(Guid.Empty, actual); 
         }
     }
 }

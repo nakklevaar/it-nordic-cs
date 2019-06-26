@@ -28,7 +28,7 @@ namespace Reminder.Storage.SqlServer.ADO
                 cmd.Parameters.AddWithValue("@contactId", reminder.ContactId);
                 cmd.Parameters.AddWithValue("@targetDate", reminder.Date);
                 cmd.Parameters.AddWithValue("@message", reminder.Message);
-                cmd.Parameters.AddWithValue("@statusId", (byte)reminder.Status);
+                cmd.Parameters.AddWithValue("@status", (byte)reminder.Status);
 
                 var reminderIdParameter = new SqlParameter("@reminderId", SqlDbType.UniqueIdentifier);
 

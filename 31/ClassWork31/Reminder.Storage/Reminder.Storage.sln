@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Storage.InMemory", "Reminder.Storage.InMemory\Reminder.Storage.InMemory.csproj", "{619B2C40-F465-4AE0-8BA6-59DEDE9919E7}"
 EndProject
@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Storage.WebApi.Cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Storage.WebApi.Core", "Reminder.Storage.WebApi.Core\Reminder.Storage.WebApi.Core.csproj", "{110EC484-B8D9-4615-82C8-ED36C45B9CF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Storage.SqlServer.ADO", "Reminder.Storage.SqlServer.ADO\Reminder.Storage.SqlServer.ADO.csproj", "{0330A50C-A218-4EF1-A118-45C99A765042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Storage.SqlServer.ADO", "Reminder.Storage.SqlServer.ADO\Reminder.Storage.SqlServer.ADO.csproj", "{3FB44A71-2D8B-4505-9FE6-630F07B6EEFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reminder.Storage.SqlServer.ADO.Tests", "Reminder.Storage.SqlServer.ADO.Tests\Reminder.Storage.SqlServer.ADO.Tests.csproj", "{4EC5C3DF-FD7C-41C9-B65C-32C14AD9105E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Storage.SqlServer.ADO.Tests", "Reminder.Storage.SqlServer.ADO.Tests\Reminder.Storage.SqlServer.ADO.Tests.csproj", "{14A3ED2E-946E-4952-A7B8-E789ED1EE082}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,14 +55,14 @@ Global
 		{110EC484-B8D9-4615-82C8-ED36C45B9CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{110EC484-B8D9-4615-82C8-ED36C45B9CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{110EC484-B8D9-4615-82C8-ED36C45B9CF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0330A50C-A218-4EF1-A118-45C99A765042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0330A50C-A218-4EF1-A118-45C99A765042}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0330A50C-A218-4EF1-A118-45C99A765042}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0330A50C-A218-4EF1-A118-45C99A765042}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EC5C3DF-FD7C-41C9-B65C-32C14AD9105E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EC5C3DF-FD7C-41C9-B65C-32C14AD9105E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EC5C3DF-FD7C-41C9-B65C-32C14AD9105E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EC5C3DF-FD7C-41C9-B65C-32C14AD9105E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FB44A71-2D8B-4505-9FE6-630F07B6EEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB44A71-2D8B-4505-9FE6-630F07B6EEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB44A71-2D8B-4505-9FE6-630F07B6EEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB44A71-2D8B-4505-9FE6-630F07B6EEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A3ED2E-946E-4952-A7B8-E789ED1EE082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A3ED2E-946E-4952-A7B8-E789ED1EE082}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A3ED2E-946E-4952-A7B8-E789ED1EE082}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A3ED2E-946E-4952-A7B8-E789ED1EE082}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

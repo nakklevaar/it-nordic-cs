@@ -1,5 +1,4 @@
 using Reminder.Storage.SqlServer.ADO.Tests.Properties;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 
@@ -8,7 +7,6 @@ namespace Reminder.Storage.SqlServer.ADO.Tests
    
     public class SqlReminderStorageInit
     {
-
         private readonly string _connectionString;
 
         public SqlReminderStorageInit(string connectionString)
@@ -16,33 +14,35 @@ namespace Reminder.Storage.SqlServer.ADO.Tests
             _connectionString = connectionString;
         }
 
-        private void RunSqlScripts(string scripts)
+        public void InitializeDataBase()
         {
-            using (var sqlConnection = GetOpenedSqlConnection())
+            RunSqlScript(Resources.Schema);
+            RunSqlScript(Resources.SPs);
+            RunSqlScript(Resources.Data);
+        }
+
+        private void RunSqlScript(string script)
+        {
+            using (SqlConnection sqlConnection = GetOpenedSqlConnection())
             {
                 var cmd = sqlConnection.CreateCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
 
-                var sqlInstructions = splitSqlInstructions(script);
-                foreach (string sqlInstruction in sqlInstructions)
+                var sqlInstructions = SplitSqlInstructions(script);
+                foreach (var sqlInstruction in sqlInstructions)
                 {
                     if (string.IsNullOrWhiteSpace(sqlInstruction))
                         continue;
+
                     cmd.CommandText = sqlInstruction;
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        private string[] splitSqlInstructions(string script)
+        private string[] SplitSqlInstructions(string script)
         {
             return Regex.Split(script, @"\bGO\b");
-        }
-
-        public SqlReminderStorageInit()
-        {
-            RunSqlScripts(Resources.schema);
-            RunSqlScripts(Resources.SPs);
         }
 
         private SqlConnection GetOpenedSqlConnection()
@@ -51,5 +51,6 @@ namespace Reminder.Storage.SqlServer.ADO.Tests
             sqlConnection.Open();
             return sqlConnection;
         }
+
     }
 }
